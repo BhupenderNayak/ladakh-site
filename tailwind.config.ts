@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Ladakh Tourism Colors
+				crimson: '#760504',
+				saffron: '#FF9E1B',
+				jetblack: '#090A0E',
+				dairycream: '#F9E4BC'
+			},
+			fontFamily: {
+				'montserrat': ['Montserrat', 'sans-serif'],
+				'tinos': ['Tinos', 'serif'],
+				'times': ['Times New Roman', 'serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
