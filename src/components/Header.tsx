@@ -83,44 +83,44 @@ const Header = () => {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Primary Branding Section */}
-          <div className="bg-dairycream border-b-2 border-crimson">
-            <div className="container mx-auto px-4 py-4">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-                <div className="w-full flex items-center justify-between lg:w-auto">
-                  <img src="/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png" alt="Discover Ladakh Logo" className="h-16 lg:h-20 object-contain" />
-                  <div className="lg:hidden">
-                    <DrawerTrigger asChild>
-                      <Button variant="ghost" size="icon" aria-label="Open menu" className="h-12 w-12 text-crimson hover:bg-crimson/10 focus-visible:ring-saffron">
-                        <Menu size={28} />
-                      </Button>
-                    </DrawerTrigger>
-                  </div>
-                </div>
-
-
-                {/* Search Bar */}
-                <div className="w-full lg:w-auto lg:min-w-[300px]">
-                  <form onSubmit={handleSearch} className="relative">
-                    <Input 
-                      type="search" 
-                      placeholder="Search destinations, permits, guides..." 
-                      value={searchQuery} 
-                      onChange={e => setSearchQuery(e.target.value)} 
-                      className="w-full pr-12 border-2 border-crimson focus:ring-crimson focus:border-crimson h-12 text-base" 
-                      aria-label="Search tourism information" 
-                    />
-                    <Button 
-                      type="submit" 
-                      size="icon" 
-                      aria-label="Submit search" 
-                      className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-crimson hover:bg-crimson/90 text-white rounded-lg h-9 w-9"
-                    >
-                      <Search size={20} />
+        {/* Primary Branding Section */}
+        <div className="bg-dairycream border-b-2 border-crimson">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+              <div className="w-full flex items-center justify-between lg:w-auto">
+                <img src="/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png" alt="Discover Ladakh Logo" className="h-16 lg:h-20 object-contain" />
+                <div className="lg:hidden">
+                  <DrawerTrigger asChild>
+                    <Button variant="ghost" size="icon" aria-label="Open menu" className="h-12 w-12 text-crimson hover:bg-crimson/10 focus-visible:ring-saffron">
+                      <Menu size={28} />
                     </Button>
-                  </form>
+                  </DrawerTrigger>
                 </div>
+              </div>
+
+
+              {/* Search Bar */}
+              <div className="w-full lg:w-auto lg:min-w-[300px]">
+                <form onSubmit={handleSearch} className="relative">
+                  <Input 
+                    type="search" 
+                    placeholder="Search destinations, permits, guides..." 
+                    value={searchQuery} 
+                    onChange={e => setSearchQuery(e.target.value)} 
+                    className="w-full pr-12 border-2 border-crimson focus:ring-crimson focus:border-crimson h-12 text-base" 
+                    aria-label="Search tourism information" 
+                  />
+                  <Button 
+                    type="submit" 
+                    size="icon" 
+                    aria-label="Submit search" 
+                    className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-crimson hover:bg-crimson/90 text-white rounded-lg h-9 w-9"
+                  >
+                    <Search size={20} />
+                  </Button>
+                </form>
               </div>
             </div>
           </div>
