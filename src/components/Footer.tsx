@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SocialLinks from './SocialLinks';
@@ -11,13 +10,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Branding */}
           <div className="col-span-1">
-             <div className="flex items-center gap-4 mb-4">
-                <img src="/lovable-uploads/474c0a91-453c-40b6-9716-5153020354d2.png" alt="Tourism of Ladakh Logo" className="h-12 bg-white/20 p-1 rounded" />
-                <div>
-                  <h3 className="text-xl font-bold text-white font-tinos">Discover Ladakh</h3>
-                  <p className="text-xs text-dairycream/80">Official Tourism Portal</p>
-                </div>
-              </div>
+             <img src="/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png" alt="Discover Ladakh Logo" className="h-16 mb-4" />
             <p className="text-sm text-dairycream/70">
               Experience the land of high passes, ancient monasteries, and breathtaking landscapes.
             </p>

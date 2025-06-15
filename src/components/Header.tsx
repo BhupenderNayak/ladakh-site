@@ -66,17 +66,7 @@ const Header = () => {
           <div className="container mx-auto px-4 py-4">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
               <div className="w-full flex items-center justify-between lg:w-auto">
-                <div className="flex items-center gap-4">
-                  <img src="/lovable-uploads/474c0a91-453c-40b6-9716-5153020354d2.png" alt="Tourism of Ladakh Logo" className="h-12 lg:h-16 object-contain" />
-                  <div className="hidden lg:block text-left">
-                    <h1 className="text-2xl lg:text-3xl font-bold text-crimson font-tinos">
-                      Discover Ladakh
-                    </h1>
-                    <p className="text-jetblack text-sm font-medium">
-                      Official Tourism Portal | Government of Ladakh
-                    </p>
-                  </div>
-                </div>
+                <img src="/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png" alt="Discover Ladakh Logo" className="h-16 lg:h-20 object-contain" />
                 <div className="lg:hidden">
                   <DrawerTrigger asChild>
                     <Button variant="ghost" size="icon" aria-label="Open menu" className="h-12 w-12 text-crimson hover:bg-crimson/10 focus-visible:ring-saffron">
