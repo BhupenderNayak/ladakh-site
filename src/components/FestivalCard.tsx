@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import type { Festival } from '@/data/festivals-data';
+import { Link } from 'react-router-dom';
 
 interface FestivalCardProps {
   festival: Festival;
@@ -34,12 +35,14 @@ const FestivalCard: React.FC<FestivalCardProps> = ({ festival }) => {
           <p className="text-sm text-gray-700 font-montserrat leading-relaxed flex-grow">
             {festival.blurb}
           </p>
-          <Button 
-            variant="default" 
-            className="mt-4 w-full bg-saffron text-white hover:bg-saffron/90 group-hover:animate-button-pulse"
-          >
-            Read More
-          </Button>
+          <Link to={`/festivals/${festival.id}`} className="block mt-4">
+            <Button 
+              variant="default" 
+              className="w-full bg-saffron text-white hover:bg-saffron/90 group-hover:animate-button-pulse"
+            >
+              Read More
+            </Button>
+          </Link>
         </CardContent>
       </Card>
     </div>

@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import LiveUpdatesCurrentStatus from "./pages/LiveUpdatesCurrentStatus";
 import AwardsRecognition from "./pages/AwardsRecognition";
 import FestivalsAndEvents from "./pages/FestivalsAndEvents";
+import FestivalDetailsPage from "./pages/FestivalDetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/awards" element={<AwardsRecognition />} />
           <Route path="/updates/weather" element={<LiveUpdatesCurrentStatus />} />
           <Route path="/festivals" element={<FestivalsAndEvents />} />
+          <Route path="/festivals/:festivalId" element={<FestivalDetailsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
