@@ -14,18 +14,9 @@ const Index = () => {
       <main id="main-content" tabIndex={-1}>
         {/* Hero Section */}
         <section className="bg-dairycream">
-          <div className="container mx-auto px-4 py-20">
+          <div className="container mx-auto px-4 py-16">
             <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-4xl lg:text-6xl font-bold text-crimson mb-6 font-tinos">
-                Discover Ladakh
-              </h1>
-              <p className="text-xl text-jetblack mb-8 font-montserrat leading-relaxed">
-                Discover the Land of High Passes - where ancient Buddhist culture meets 
-                breathtaking Himalayan landscapes. Plan your journey to one of India's 
-                most spectacular destinations.
-              </p>
-              
-              <div className="grid md:grid-cols-3 gap-8 mt-12">
+              <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center p-6 bg-white/50 rounded-lg shadow-sm">
                   <h2 className="text-2xl font-bold text-crimson mb-4 font-tinos">
                     Sacred Monasteries

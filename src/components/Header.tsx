@@ -90,7 +90,13 @@ const Header = () => {
           <div className="container mx-auto px-4 py-4">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
               <div className="w-full flex items-center justify-between lg:w-auto">
-                <img src="/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png" alt="Discover Ladakh Logo" className="h-16 lg:h-20 object-contain" />
+                <div className="flex items-center gap-4">
+                  <img src="/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png" alt="Discover Ladakh Logo" className="h-16 shrink-0 lg:h-20 object-contain" />
+                  <div className="hidden lg:block">
+                    <h1 className="text-3xl font-bold text-crimson font-tinos leading-tight">Discover Ladakh</h1>
+                    <p className="text-sm text-jetblack font-montserrat">Department of Tourism, Ladakh</p>
+                  </div>
+                </div>
                 <div className="lg:hidden">
                   <DrawerTrigger asChild>
                     <Button variant="ghost" size="icon" aria-label="Open menu" className="h-12 w-12 text-crimson hover:bg-crimson/10 focus-visible:ring-saffron">
