@@ -25,6 +25,15 @@ const AwardsRecognition = () => {
       <AwardsHeader offsetY={offsetY} />
 
       <main className="container mx-auto px-4 py-16">
+        <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold font-tinos text-crimson mb-4 animate-fade-in-up">
+                Our Collection of Accolades
+            </h2>
+            <p className="text-lg text-jetblack/80 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+                Ladakh's commitment to excellence and sustainable tourism has been recognized by prestigious organizations worldwide. Explore our awards below.
+            </p>
+            <div className="h-1 w-20 bg-saffron mx-auto mt-6 animate-fade-in-up" style={{ animationDelay: '400ms' }}></div>
+        </div>
         <AwardsList />
         <JourneyContinues />
       </main>

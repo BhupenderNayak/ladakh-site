@@ -3,7 +3,7 @@ import { AwardCardProps } from "@/components/AwardCard";
 
 export const AWARDS: AwardCardProps[] = [
   {
-    image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop",
+    image: "/lovable-uploads/9b684758-7889-495d-8fb3-332915116eb6.png",
     title: "Best Responsible Tourism Destination (India)",
     description: "Awarded by the Ministry of Tourism, Ladakh has been recognized for its sustainable and responsible tourism practices.",
     year: 2024,
@@ -11,7 +11,7 @@ export const AWARDS: AwardCardProps[] = [
     link: "https://www.tourism.gov.in",
   },
   {
-    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop",
+    image: "/lovable-uploads/83b4c407-fc53-4aea-a5d2-965c1629c593.png",
     title: "Asia's Most Picturesque Travel Region",
     description: "Named one of the most picturesque places in Asia for its breathtaking Himalayan landscapes and ancient monasteries.",
     year: "2023",
@@ -19,7 +19,7 @@ export const AWARDS: AwardCardProps[] = [
     link: "https://www.lonelyplanet.com",
   },
   {
-    image: "https://images.unsplash.com/photo-1466442929976-97f336a657be?w=800&h=600&fit=crop",
+    image: "/lovable-uploads/9388af92-25df-4897-9c18-da7fc6591b5c.png",
     title: "UNESCO Intangible Cultural Heritage",
     description: "Several Ladakhi festivals are now recognized by UNESCO, promoting preservation of its unique cultural heritage.",
     year: 2022,
@@ -51,7 +51,7 @@ export const AWARDS: AwardCardProps[] = [
 ];
 
 export const HERO_IMAGES = [
-  { src: "https://images.unsplash.com/photo-1596700692211-23a4d8d1e3e5?w=1600&h=900&fit=crop&q=80", alt: "The magnificent Thiksey Monastery, a Tibetan Buddhist monastery of the Yellow Hat sect, perched on a hill in Ladakh." },
-  { src: "https://images.unsplash.com/photo-1617183654585-680075a40134?w=1600&h=900&fit=crop&q=80", alt: "Diskit Monastery in the Nubra Valley, known for its towering statue of Maitreya Buddha and panoramic views." },
-  { src: "https://images.unsplash.com/photo-1547475348-3585a9a5d59c?w=1600&h=900&fit=crop&q=80", alt: "The serene courtyard of Hemis Monastery, the wealthiest monastery in Ladakh, during a festival." },
+  { src: "/lovable-uploads/9388af92-25df-4897-9c18-da7fc6591b5c.png", alt: "The towering Maitreya Buddha statue at Diskit Monastery against a beautiful sunset sky in Nubra Valley, Ladakh." },
+  { src: "/lovable-uploads/9b684758-7889-495d-8fb3-332915116eb6.png", alt: "A close-up of a golden statue of a deity inside a vibrantly decorated Ladakhi monastery." },
+  { src: "/lovable-uploads/83b4c407-fc53-4aea-a5d2-965c1629c593.png", alt: "The magnificent two-story high statue of Maitreya Buddha inside Thiksey Monastery, Ladakh." },
 ];
