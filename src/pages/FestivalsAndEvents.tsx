@@ -21,7 +21,7 @@ const FestivalsAndEvents = () => {
       <Header />
       <FestivalsHero />
 
-      <main className="container mx-auto px-4 py-16">
+      <main id="main-content" className="container mx-auto px-4 pt-4 sm:pt-8 pb-16">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold font-tinos text-crimson">Festivals & Events</h2>
           <p className="text-lg text-jetblack mt-2 max-w-2xl mx-auto">

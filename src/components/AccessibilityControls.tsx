@@ -1,9 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Plus, Minus, Eye, Sun, Moon, Contrast, Volume2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-const AccessibilityControls = () => {
+interface AccessibilityControlsProps {
+  variant?: 'light' | 'dark';
+}
+
+const AccessibilityControls: React.FC<AccessibilityControlsProps> = ({ variant = 'dark' }) => {
   const [fontSize, setFontSize] = useState(16);
   const [contrastMode, setContrastMode] = useState('standard');
   const [isReaderActive, setIsReaderActive] = useState(false);
@@ -65,17 +69,29 @@ const AccessibilityControls = () => {
     }
   };
 
+  const buttonClasses = cn(
+    "h-6 p-0",
+    variant === 'dark'
+      ? "text-white hover:text-saffron hover:bg-white/10"
+      : "text-jetblack hover:text-crimson hover:bg-black/5"
+  );
+  
+  const separatorClasses = cn(
+    "border-r pr-2",
+    variant === 'dark' ? "border-gray-600" : "border-gray-300"
+  );
+
   return (
     <div className="flex items-center gap-2" role="toolbar" aria-label="Accessibility controls">
       {/* Font Size Controls */}
-      <div className="flex items-center gap-1 border-r border-gray-600 pr-2">
-        <span className="text-xs mr-1">Text:</span>
+      <div className={cn("flex items-center gap-1", separatorClasses)}>
+        <span className={cn("text-xs mr-1", variant === 'dark' ? 'text-white' : 'text-jetblack')}>Text:</span>
         <Button
           variant="ghost"
           size="sm"
           onClick={decreaseFontSize}
           disabled={fontSize <= 12}
-          className="h-6 w-6 p-0 text-white hover:text-saffron hover:bg-white/10"
+          className={cn(buttonClasses, "w-6")}
           aria-label="Decrease text size"
           title="Decrease text size"
         >
@@ -85,7 +101,7 @@ const AccessibilityControls = () => {
           variant="ghost"
           size="sm"
           onClick={resetFontSize}
-          className="h-6 w-6 p-0 text-white hover:text-saffron hover:bg-white/10"
+          className={cn(buttonClasses, "w-6")}
           aria-label="Reset text size"
           title="Reset text size to default"
         >
@@ -96,7 +112,7 @@ const AccessibilityControls = () => {
           size="sm"
           onClick={increaseFontSize}
           disabled={fontSize >= 24}
-          className="h-6 w-6 p-0 text-white hover:text-saffron hover:bg-white/10"
+          className={cn(buttonClasses, "w-6")}
           aria-label="Increase text size"
           title="Increase text size"
         >
@@ -109,7 +125,7 @@ const AccessibilityControls = () => {
         variant="ghost"
         size="sm"
         onClick={toggleContrast}
-        className="h-6 px-2 text-white hover:text-saffron hover:bg-white/10"
+        className={cn(buttonClasses, "px-2")}
         aria-label={`Current contrast: ${contrastMode}. Click to change contrast mode`}
         title="Toggle contrast mode"
       >
@@ -123,9 +139,11 @@ const AccessibilityControls = () => {
         variant="ghost"
         size="sm"
         onClick={toggleScreenReader}
-        className={`h-6 px-2 text-white hover:text-saffron hover:bg-white/10 ${
+        className={cn(
+          "h-6 px-2",
+          variant === 'dark' ? "text-white hover:text-saffron hover:bg-white/10" : "text-jetblack hover:text-crimson hover:bg-black/5",
           isReaderActive ? 'bg-saffron text-jetblack' : ''
-        }`}
+        )}
         aria-label={`Screen reader ${isReaderActive ? 'active' : 'inactive'}. Click to toggle`}
         title="Toggle screen reader assistance"
         aria-pressed={isReaderActive}

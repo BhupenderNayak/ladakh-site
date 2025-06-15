@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface Language {
   code: string;
@@ -15,7 +16,11 @@ const languages: Language[] = [
   { code: 'bo', name: 'Tibetan', nativeName: 'བཀྲ་ཤིས' }
 ];
 
-const LanguageSwitcher = () => {
+interface LanguageSwitcherProps {
+  variant?: 'light' | 'dark';
+}
+
+const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'dark' }) => {
   const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,7 +48,12 @@ const LanguageSwitcher = () => {
         variant="ghost"
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
-        className="text-white hover:text-saffron hover:bg-white/10 gap-1 h-auto py-1 px-2"
+        className={cn(
+          "gap-1 h-auto py-1 px-2 items-center",
+          variant === 'dark'
+            ? "text-white hover:text-saffron hover:bg-white/10"
+            : "text-jetblack hover:text-crimson hover:bg-black/5"
+        )}
         aria-haspopup="listbox"
         aria-controls="language-menu"
       >

@@ -14,7 +14,7 @@ const FestivalsHero = () => {
   const marqueeFestivals = FESTIVALS_DATA.filter(f => f.isMarquee);
 
   return (
-    <div className="relative -mt-20 h-[70vh] w-full">
+    <div className="relative -mt-20 h-auto md:h-[70vh] w-full">
       <Carousel
         plugins={[
           Autoplay({
@@ -30,11 +30,11 @@ const FestivalsHero = () => {
         <CarouselContent className="h-full">
           {marqueeFestivals.map((festival) => (
             <CarouselItem key={festival.id} className="h-full">
-              <div className="relative w-full h-full overflow-hidden">
+              <div className="relative w-full h-full aspect-[3/2] md:aspect-video lg:aspect-auto lg:h-[70vh] overflow-hidden">
                 <img
                   src={`${festival.image}&w=1920&h=1080&fit=crop`}
                   alt={`Hero image for ${festival.name}`}
-                  className="w-full h-full object-cover animate-ken-burns"
+                  className="w-full h-full object-cover object-center animate-ken-burns"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4">

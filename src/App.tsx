@@ -19,15 +19,19 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="/awards" element={<AwardsRecognition />} />
-          <Route path="/updates/weather" element={<LiveUpdatesCurrentStatus />} />
-          <Route path="/festivals" element={<FestivalsAndEvents />} />
-          <Route path="/festivals/:festivalId" element={<FestivalDetailsPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="min-h-screen flex flex-col">
+          <div className="flex-grow pb-20 lg:pb-0">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="/awards" element={<AwardsRecognition />} />
+              <Route path="/updates/weather" element={<LiveUpdatesCurrentStatus />} />
+              <Route path="/festivals" element={<FestivalsAndEvents />} />
+              <Route path="/festivals/:festivalId" element={<FestivalDetailsPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
