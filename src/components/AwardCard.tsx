@@ -28,12 +28,12 @@ const AwardCard: React.FC<AwardCardProps> = ({
   const IconComponent = iconMap[icon];
 
   return (
-    <Card className="shadow-lg bg-dairycream border-2 border-crimson hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col overflow-hidden">
+    <Card className="shadow-lg bg-dairycream border-2 border-crimson/80 hover:border-saffron hover:shadow-xl hover:shadow-saffron/20 transition-all duration-300 hover:scale-105 h-full flex flex-col overflow-hidden group">
       <div className="relative w-full aspect-[16/9] overflow-hidden">
         <img
           src={image}
           alt={title}
-          className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
+          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
           loading="lazy"
         />
         <div className="absolute top-3 right-3 bg-white/95 rounded-full p-2 shadow-lg backdrop-blur-sm">

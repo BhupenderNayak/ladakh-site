@@ -62,15 +62,25 @@ const AwardsRecognition = () => {
       </Helmet>
       
       <header 
-        className="relative bg-cover bg-center text-white py-24 shadow-2xl"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1595624248734-3f19a4a3e2e2?w=1600&h=900&fit=crop')" }}
+        className="relative h-[60vh] text-white shadow-2xl overflow-hidden flex items-center justify-center text-center"
       >
-        <div className="absolute inset-0 bg-jetblack/70" />
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold font-tinos mb-6 leading-tight">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-1/2 left-1/2 w-full h-full min-w-full min-h-full object-cover transform -translate-x-1/2 -translate-y-1/2 z-0"
+          poster="https://images.unsplash.com/photo-1595624248734-3f19a4a3e2e2?w=1600&h=900&fit=crop"
+        >
+          <source src="https://videos.pexels.com/video-files/2099395/2099395-hd_1920_1080_25fps.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-jetblack/60" />
+        <div className="relative container mx-auto px-4 z-10">
+          <h1 className="text-5xl lg:text-7xl font-bold font-tinos mb-6 leading-tight opacity-0 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
             Awards & Recognition
           </h1>
-          <p className="text-xl lg:text-2xl mx-auto max-w-4xl font-montserrat leading-relaxed opacity-95">
+          <p className="text-xl lg:text-2xl mx-auto max-w-4xl font-montserrat leading-relaxed opacity-0 animate-fade-in-up" style={{ animationDelay: '500ms' }}>
             Ladakh shines on the global stage, earning prestigious accolades for its breathtaking landscapes, 
             sustainable tourism initiatives, thrilling adventures, and rich cultural heritage. 
             Here are some of the honors that make us proud!
