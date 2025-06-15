@@ -6,17 +6,21 @@ import Autoplay from "embla-carousel-autoplay";
 import ParticlesComponent from "./ParticlesComponent";
 import { HERO_IMAGES } from "@/data/awards-data";
 
-interface AwardsHeaderProps {
-  offsetY: number;
-}
-
-const AwardsHeader: React.FC<AwardsHeaderProps> = ({ offsetY }) => {
+const AwardsHeader: React.FC = () => {
+  const [offsetY, setOffsetY] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
 
   const autoplayPlugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true }));
+
+  const handleScroll = () => setOffsetY(window.pageYOffset);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!api) return;

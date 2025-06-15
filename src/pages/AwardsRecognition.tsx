@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import AwardsHeader from "@/components/AwardsHeader";
 import AwardsList from "@/components/AwardsList";
 import JourneyContinues from "@/components/JourneyContinues";
+import CulturalHeritageHighlight from "@/components/CulturalHeritageHighlight";
 
 const AwardsRecognition = () => {
   return (
@@ -28,6 +29,7 @@ const AwardsRecognition = () => {
             <div className="h-1 w-20 bg-saffron mx-auto mt-6 animate-fade-in-up" style={{ animationDelay: '400ms' }}></div>
         </div>
         <AwardsList />
+        <CulturalHeritageHighlight />
         <JourneyContinues />
       </main>
     </div>

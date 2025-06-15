@@ -52,6 +52,10 @@ export const AWARDS: AwardCardProps[] = [
 
 export const HERO_IMAGES = [
   { src: "/lovable-uploads/9388af92-25df-4897-9c18-da7fc6591b5c.png", alt: "The towering Maitreya Buddha statue at Diskit Monastery against a beautiful sunset sky in Nubra Valley, Ladakh." },
+  { src: "/lovable-uploads/800f60ca-1a82-47db-bbab-599ecab70898.png", alt: "Dancers in vibrant costumes perform the traditional Cham dance in the courtyard of a monastery during a festival in Ladakh." },
   { src: "/lovable-uploads/9b684758-7889-495d-8fb3-332915116eb6.png", alt: "A close-up of a golden statue of a deity inside a vibrantly decorated Ladakhi monastery." },
+  { src: "/lovable-uploads/83bfec89-af91-497d-bb26-8714c4c35e57.png", alt: "A performer in a striking red mask with skull details during the Hemis Festival in Ladakh." },
   { src: "/lovable-uploads/83b4c407-fc53-4aea-a5d2-965c1629c593.png", alt: "The magnificent two-story high statue of Maitreya Buddha inside Thiksey Monastery, Ladakh." },
+  { src: "/lovable-uploads/22e97fc9-4f75-4f30-874e-e4faa268d2e4.png", alt: "A masked dancer in traditional attire performs at the Hemis Festival, with a stupa and monastery in the background." },
+  { src: "/lovable-uploads/31cc3e95-9ce8-4338-8d31-73d6447d5cb9.png", alt: "Three performers in colorful costumes and elaborate masks participate in a procession at a Ladakhi festival." },
 ];
