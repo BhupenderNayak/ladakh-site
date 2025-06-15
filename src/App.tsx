@@ -14,6 +14,9 @@ import FaqPage from "./pages/FaqPage";
 import HelpPage from "./pages/HelpPage";
 import FeedbackPage from "./pages/FeedbackPage";
 import PlanYourTrip from "./pages/PlanYourTrip";
+import HistoricalMonumentsPage from "./pages/culture/HistoricalMonumentsPage";
+import ArtAndCraftPage from "./pages/culture/ArtAndCraftPage";
+import LocalCuisinePage from "./pages/culture/LocalCuisinePage";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +39,9 @@ const App = () => (
               <Route path="/contact/help" element={<HelpPage />} />
               <Route path="/contact/feedback" element={<FeedbackPage />} />
               <Route path="/plan" element={<PlanYourTrip />} />
+              <Route path="/culture/monuments" element={<HistoricalMonumentsPage />} />
+              <Route path="/culture/art-craft" element={<ArtAndCraftPage />} />
+              <Route path="/culture/cuisine" element={<LocalCuisinePage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

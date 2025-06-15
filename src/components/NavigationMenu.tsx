@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -77,14 +78,14 @@ const navigationItems = [
   },
   {
     name: 'Culture & Heritage',
-    href: '/culture',
+    href: '/culture/monuments',
     hasDropdown: true,
     dropdown: [
       {
         category: 'Heritage',
         items: [
-          { name: 'History & Monuments', href: '/culture/history' },
-          { name: 'Art & Handicrafts', href: '/culture/art' },
+          { name: 'Historical Monuments', href: '/culture/monuments' },
+          { name: 'Art & Craft', href: '/culture/art-craft' },
           { name: 'Local Cuisine', href: '/culture/cuisine' }
         ]
       }
