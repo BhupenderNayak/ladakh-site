@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import AwardCard, { AwardCardProps } from "@/components/AwardCard";
 import { Helmet } from "react-helmet";
@@ -124,12 +123,13 @@ const AwardsRecognition = () => {
   }, [api]);
 
   const togglePlay = useCallback(() => {
-    if (!api) return;
-    const player = autoplayPlugin.current.player;
+    const autoplay = autoplayPlugin.current;
+    if (!api || !autoplay) return;
+
     if (isPlaying) {
-      player.stop();
+      autoplay.stop();
     } else {
-      player.play();
+      autoplay.play();
     }
     setIsPlaying((prev) => !prev);
   }, [api, isPlaying]);
