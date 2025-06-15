@@ -10,6 +10,9 @@ import LiveUpdatesCurrentStatus from "./pages/LiveUpdatesCurrentStatus";
 import AwardsRecognition from "./pages/AwardsRecognition";
 import FestivalsAndEvents from "./pages/FestivalsAndEvents";
 import FestivalDetailsPage from "./pages/FestivalDetailsPage";
+import FaqPage from "./pages/FaqPage";
+import HelpPage from "./pages/HelpPage";
+import FeedbackPage from "./pages/FeedbackPage";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +31,9 @@ const App = () => (
               <Route path="/updates/weather" element={<LiveUpdatesCurrentStatus />} />
               <Route path="/festivals" element={<FestivalsAndEvents />} />
               <Route path="/festivals/:festivalId" element={<FestivalDetailsPage />} />
+              <Route path="/contact/faq" element={<FaqPage />} />
+              <Route path="/contact/help" element={<HelpPage />} />
+              <Route path="/contact/feedback" element={<FeedbackPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

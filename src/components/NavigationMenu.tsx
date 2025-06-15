@@ -123,7 +123,8 @@ const navigationItems = [
         category: 'Get Help',
         items: [
           { name: 'Feedback Portal', href: '/contact/feedback' },
-          { name: 'FAQs / Help', href: '/contact/help' }
+          { name: 'FAQs', href: '/contact/faq' },
+          { name: 'Help Center', href: '/contact/help' },
         ]
       }
     ]

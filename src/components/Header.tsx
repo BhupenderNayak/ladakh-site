@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, Phone, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -124,8 +123,10 @@ const Header = () => {
                 <Button className="bg-crimson hover:bg-crimson/90 text-white font-semibold px-6 py-2" aria-label="Plan your journey to Ladakh">
                   Plan Your Journey
                 </Button>
-                <Button variant="outline" className="border-saffron text-saffron hover:bg-saffron hover:text-white font-semibold px-6 py-2" aria-label="Apply for travel permit">
-                  Apply for Permit
+                <Button asChild variant="outline" className="border-saffron text-saffron hover:bg-saffron hover:text-white font-semibold px-6 py-2" aria-label="Apply for travel permit">
+                  <a href="https://www.lahdclehpermit.in/register-as-domestic" target="_blank" rel="noopener noreferrer">
+                    Apply for Permit
+                  </a>
                 </Button>
               </div>
             </div>
