@@ -74,7 +74,7 @@ const HistoricalMonumentsPage = () => {
             loop
             muted
             playsInline
-            poster="https://images.unsplash.com/photo-1588269837016-858b38745a5a?w=1200&h=600&fit=crop&auto=format&q=80"
+            poster="/lovable-uploads/474c0a91-453c-40b6-9716-5153020354d2.png"
           />
           <div 
             className="absolute inset-0 bg-black/20 flex items-center justify-center transition-opacity duration-300"
