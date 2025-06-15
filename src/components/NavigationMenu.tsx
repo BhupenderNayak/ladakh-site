@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -112,7 +111,7 @@ const navigationItems = [
   },
   {
     name: 'Awards & Recognition',
-    href: '/awards',
+    href: '/awards', // <-- Set to the awards page
     hasDropdown: false
   },
   {
