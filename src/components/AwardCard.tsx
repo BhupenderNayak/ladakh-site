@@ -25,35 +25,42 @@ const AwardCard: React.FC<AwardCardProps> = ({
   link,
   icon = "award",
 }) => {
-  const IconComponent = iconMap[icon] || Award;
+  const IconComponent = iconMap[icon];
 
   return (
-    <Card className="shadow-lg bg-dairycream border-crimson hover:shadow-xl transition-shadow h-full flex flex-col">
-      <div className="relative w-full aspect-[16/9] rounded-t-lg overflow-hidden">
+    <Card className="shadow-lg bg-dairycream border-2 border-crimson hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col overflow-hidden">
+      <div className="relative w-full aspect-[16/9] overflow-hidden">
         <img
           src={image}
           alt={title}
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute top-3 right-3 bg-white/90 rounded-full p-1 shadow">
-          <IconComponent className="text-crimson" size={22} />
+        <div className="absolute top-3 right-3 bg-white/95 rounded-full p-2 shadow-lg backdrop-blur-sm">
+          <IconComponent className="text-crimson" size={24} />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
       </div>
-      <CardHeader className="pb-0 pt-2">
-        <CardTitle className="text-crimson text-lg font-tinos">{title}</CardTitle>
-        {year && <span className="inline-block bg-saffron text-white rounded px-2 py-0.5 text-xs mt-1">{year}</span>}
+      <CardHeader className="pb-2 pt-4">
+        <CardTitle className="text-crimson text-xl font-tinos leading-tight">{title}</CardTitle>
+        {year && (
+          <span className="inline-block bg-saffron text-white rounded-full px-3 py-1 text-sm font-semibold w-fit">
+            {year}
+          </span>
+        )}
       </CardHeader>
-      <CardContent className="pt-2 grow flex flex-col">
-        <CardDescription className="text-jetblack mb-4">{description}</CardDescription>
+      <CardContent className="pt-0 grow flex flex-col">
+        <CardDescription className="text-jetblack mb-4 leading-relaxed text-base">
+          {description}
+        </CardDescription>
         {link && (
           <a
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-auto text-saffron font-medium hover:underline"
+            className="mt-auto inline-flex items-center text-saffron font-semibold hover:text-crimson transition-colors duration-200 hover:underline"
           >
-            Read more
+            Read more →
           </a>
         )}
       </CardContent>
@@ -62,4 +69,3 @@ const AwardCard: React.FC<AwardCardProps> = ({
 };
 
 export default AwardCard;
-
