@@ -30,7 +30,7 @@ export const MONUMENTS_DATA: Monument[] = [
     location: 'Nubra Valley',
     era: '14th Century',
     description: 'The oldest and largest Buddhist monastery in the Nubra Valley of Ladakh. It belongs to the Gelugpa (Yellow Hat) sect of Tibetan Buddhism.',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80',
+    image: '/lovable-uploads/c706b8ab-5911-44e2-930e-9bf2d42c4b0e.png',
   },
   {
     id: 'hemis-monastery',
