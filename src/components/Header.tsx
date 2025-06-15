@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, Phone, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -15,24 +14,6 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const skipLinkRef = useRef<HTMLAnchorElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      // Collapse header on scroll down past a threshold, expand on scroll up
-      if (currentScrollY > lastScrollY.current && currentScrollY > 150) {
-        setIsScrolled(true);
-      } else if (currentScrollY < lastScrollY.current || currentScrollY <= 150) {
-        setIsScrolled(false);
-      }
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -82,10 +63,10 @@ const Header = () => {
 
         {/* Primary Branding Section */}
         <div className="bg-dairycream border-b-2 border-crimson">
-          <div className={`container mx-auto px-4 transition-all duration-300 ease-in-out ${isScrolled ? 'py-2' : 'py-4'}`}>
+          <div className="container mx-auto px-4 py-4">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
               <div className="w-full flex items-center justify-between lg:w-auto">
-                <img src="/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png" alt="Discover Ladakh Logo" className={`object-contain transition-all duration-300 ease-in-out ${isScrolled ? 'h-12 lg:h-14' : 'h-16 lg:h-20'}`} />
+                <img src="/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png" alt="Discover Ladakh Logo" className="h-16 lg:h-20 object-contain" />
                 <div className="lg:hidden">
                   <DrawerTrigger asChild>
                     <Button variant="ghost" size="icon" aria-label="Open menu" className="h-12 w-12 text-crimson hover:bg-crimson/10 focus-visible:ring-saffron">
@@ -122,7 +103,7 @@ const Header = () => {
         </div>
 
         {/* Main Navigation - DESKTOP ONLY */}
-        <nav className={`bg-white border-b shadow-sm hidden lg:flex overflow-hidden transition-all duration-300 ease-in-out ${isScrolled ? 'max-h-0 opacity-0' : 'max-h-48 opacity-100'}`} role="navigation" aria-label="Main navigation">
+        <nav className="bg-white border-b shadow-sm hidden lg:flex" role="navigation" aria-label="Main navigation">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-6 py-4">
