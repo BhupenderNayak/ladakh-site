@@ -94,7 +94,7 @@ const ParticlesComponent = () => {
   );
 
   if (init) {
-    return <Particles id="tsparticles" options={options} className="absolute inset-0 z-10" />;
+    return <Particles id="tsparticles" options={options} className="absolute inset-0 z-20" />;
   }
   return null;
 };
@@ -147,12 +147,12 @@ const AwardsRecognition = () => {
         <Carousel
           setApi={setApi}
           plugins={[autoplayPlugin.current]}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full z-0"
           opts={{ loop: true }}
         >
           <CarouselContent className="h-full">
-            {HERO_IMAGES.map((img, index) => (
-              <CarouselItem key={index} className="h-full relative overflow-hidden">
+            {HERO_IMAGES.map((img) => (
+              <CarouselItem key={img.src} className="h-full relative overflow-hidden">
                 <img
                   src={img.src}
                   alt={img.alt}
@@ -164,10 +164,10 @@ const AwardsRecognition = () => {
           </CarouselContent>
         </Carousel>
 
-        <div className="absolute inset-0 bg-saffron/70 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-t from-jetblack/60 via-jetblack/20 to-transparent" />
+        <div className="absolute inset-0 bg-saffron/70 mix-blend-multiply z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-jetblack/60 via-jetblack/20 to-transparent z-10" />
         
-        <div className="relative container mx-auto px-4 z-20 pb-16 pt-32">
+        <div className="relative container mx-auto px-4 z-30 pb-16 pt-32">
           <h1 className="text-4xl lg:text-5xl font-bold font-montserrat text-white mb-4 tracking-wider leading-tight animate-fade-in-up">
             Awards & Recognition
             <span className="block h-1 mt-3 bg-saffron w-24 mx-auto animate-underline-grow origin-center" />
@@ -188,7 +188,7 @@ const AwardsRecognition = () => {
 
         <button
           onClick={togglePlay}
-          className="absolute bottom-5 right-5 z-20 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 backdrop-blur-sm transition-colors"
+          className="absolute bottom-5 right-5 z-30 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 backdrop-blur-sm transition-colors"
           aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
         >
           {isPlaying ? <Pause size={20} /> : <Play size={20} />}
