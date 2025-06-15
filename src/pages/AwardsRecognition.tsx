@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import AwardCard, { AwardCardProps } from "@/components/AwardCard";
 import { Helmet } from "react-helmet";
@@ -164,7 +163,7 @@ const AwardsRecognition = () => {
           </CarouselContent>
         </Carousel>
 
-        <div className="absolute inset-0 bg-saffron/70 mix-blend-multiply z-10" />
+        <div className="absolute inset-0 bg-saffron/60 z-10" />
         <div className="absolute inset-0 bg-gradient-to-t from-jetblack/60 via-jetblack/20 to-transparent z-10" />
         
         <div className="relative container mx-auto px-4 z-30 pb-16 pt-32">
