@@ -80,6 +80,7 @@ export default function MapLadakh({}: MapLadakhProps) {
               type: "FeatureCollection",
               features: highways.map((road) => ({
                 type: "Feature",
+                id: road.id, // Fix: Add "id" property
                 geometry: {
                   type: "LineString",
                   coordinates: road.coordinates,
