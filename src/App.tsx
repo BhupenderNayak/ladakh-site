@@ -13,6 +13,7 @@ import FestivalDetailsPage from "./pages/FestivalDetailsPage";
 import FaqPage from "./pages/FaqPage";
 import HelpPage from "./pages/HelpPage";
 import FeedbackPage from "./pages/FeedbackPage";
+import PlanYourTrip from "./pages/PlanYourTrip";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
               <Route path="/contact/faq" element={<FaqPage />} />
               <Route path="/contact/help" element={<HelpPage />} />
               <Route path="/contact/feedback" element={<FeedbackPage />} />
+              <Route path="/plan" element={<PlanYourTrip />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
