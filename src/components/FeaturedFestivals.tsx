@@ -9,15 +9,15 @@ const featuredFestivals = [
     name: 'Hemis Tsechu',
     date: 'June - July',
     description: 'One of the biggest and most famous monastic festivals, celebrating the birth of Guru Padmasambhava.',
-    image: 'https://images.unsplash.com/photo-1547607758-2ac209cbe75a?q=80&w=1974&auto=format&fit=crop',
-    link: '/festivals/1'
+    image: '/lovable-uploads/2a309577-df82-4e9c-b94f-53e246a3cd4c.png',
+    link: '/festivals/hemis-festival'
   },
   {
     name: 'Losar Festival',
     date: 'December - January',
     description: 'The Ladakhi New Year, marked by vibrant ceremonies, traditional music, and dance performances.',
-    image: 'https://images.unsplash.com/photo-1619460934919-3a8a3838f5f3?q=80&w=2070&auto=format&fit=crop',
-    link: '/festivals/2'
+    image: '/lovable-uploads/63c5c3b8-f619-429a-bc4e-f1a528a4d49b.png',
+    link: '/festivals/losar-festival'
   }
 ];
 

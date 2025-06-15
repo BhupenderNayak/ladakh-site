@@ -9,8 +9,8 @@ const Hero = () => {
       {/* Background Image with Ken Burns Effect */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2070&auto=format&fit=crop"
-          alt="Panoramic view of a Ladakhi valley with mountains"
+          src="/lovable-uploads/62683a9f-bc43-43be-a637-1b12b98e25e8.png"
+          alt="Thiksey Monastery overlooking a valley in Ladakh"
           className="w-full h-full object-cover object-center animate-ken-burns"
         />
         {/* Overlay */}
