@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useCallback } from "react";
 
 type HighwayStatus = {
@@ -41,161 +42,152 @@ type LiveUpdatesState = {
 
 const LiveUpdatesContext = createContext<LiveUpdatesState | undefined>(undefined);
 
-// Helper for caching (5 min)
-const CACHE_DURATION = 5 * 60 * 1000;
-let lastFetchTime = 0;
-let cache: { highways: HighwayStatus[]; attractions: AttractionWeather[]; } = {
-  highways: [],
-  attractions: [],
-};
+// --- Dummy Data ---
+const DUMMY_HIGHWAYS: HighwayStatus[] = [
+  {
+    id: "leh-manali",
+    name: "Leh–Manali Highway",
+    coordinates: [
+      [77.5723, 34.1533],
+      [77.3303, 33.9200],
+      [77.1000, 33.5000],
+    ],
+    status: "open",
+    travelTime: "6–8h",
+    alert: "Expect delays at Baralacha La due to snow clearance.",
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: "leh-srinagar",
+    name: "Leh–Srinagar Highway",
+    coordinates: [
+      [77.5856, 34.1701],
+      [75.9528, 34.2400],
+      [74.7973, 34.0836],
+    ],
+    status: "closed",
+    travelTime: null,
+    alert: "Highway closed at Zojila Pass due to avalanche risk.",
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: "nubra-valley-road",
+    name: "Leh–Nubra Valley",
+    coordinates: [
+      [77.5833, 34.1667],
+      [77.6006, 34.2781],
+      [77.7633, 34.5537],
+    ],
+    status: "open",
+    travelTime: "3–4h",
+    lastUpdated: new Date().toISOString(),
+  },
+];
+
+const DUMMY_ATTRACTIONS: AttractionWeather[] = [
+  {
+    id: "hemis",
+    name: "Hemis Monastery",
+    description: "Largest monastery of Ladakh, known for Hemis Festival.",
+    coordinates: [77.7096, 33.9722],
+    details: {
+      altitude: 3636,
+      openingHours: "8am–6pm",
+      permits: "Not required",
+    },
+    weather: {
+      temperature: "15°C",
+      wind: "3m/s",
+      precipitation: "0mm",
+      icon: "https://openweathermap.org/img/wn/01d@2x.png",
+    },
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: "khardungla",
+    name: "Khardung La",
+    description: "One of the highest motorable roads in the world.",
+    coordinates: [77.6006, 34.2781],
+    details: {
+      altitude: 5359,
+      openingHours: "24/7 (weather permitting)",
+      permits: "Required (Inner Line)",
+    },
+    weather: {
+      temperature: "-7°C",
+      wind: "9m/s",
+      precipitation: "1mm",
+      icon: "https://openweathermap.org/img/wn/13d@2x.png",
+    },
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: "pangong",
+    name: "Pangong Lake",
+    description: "Famous blue lake changing hues with sun and clouds.",
+    coordinates: [78.3957, 33.7381],
+    details: {
+      altitude: 4250,
+      openingHours: "All day (May-Oct best)",
+      permits: "Required (Inner Line)",
+    },
+    weather: {
+      temperature: "6°C",
+      wind: "6m/s",
+      precipitation: "0mm",
+      icon: "https://openweathermap.org/img/wn/03d@2x.png",
+    },
+    lastUpdated: new Date().toISOString(),
+  },
+];
+
+// --- End Dummy Data ---
 
 export function LiveUpdatesProvider({ children }: { children: React.ReactNode }) {
-  const [highways, setHighways] = useState<HighwayStatus[]>([]);
-  const [attractions, setAttractions] = useState<AttractionWeather[]>([]);
+  const [highways, setHighways] = useState<HighwayStatus[]>(DUMMY_HIGHWAYS);
+  const [attractions, setAttractions] = useState<AttractionWeather[]>(DUMMY_ATTRACTIONS);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchHighways = useCallback(async (mapboxToken?: string) => {
+  // Simulate fetch: just set dummy data and loading state
+  const fetchHighways = useCallback(async (_mapboxToken?: string) => {
     setLoading(true);
-    setError(null);
-
-    // Example using a demo GeoJSON endpoint or Mapbox Traffic
-    try {
-      // Replace with real API and parse accordingly.
-      let featuresResponse = await fetch(
-        `https://data.ladakh-tourism-status/api/highways.json`
-      );
-      if (!featuresResponse.ok) throw new Error("Unable to fetch highway data");
-      let data = await featuresResponse.json();
-      
-      // Format highways as needed (simulate sample data)
-      const formatted: HighwayStatus[] = data.features.map(
-        (f: any, idx: number) => ({
-          id: f.properties.id ?? `road-${idx}`,
-          name: f.properties.name,
-          coordinates: f.geometry.coordinates,
-          status: f.properties.status ?? "open",
-          travelTime: f.properties.travelTime ?? null,
-          alert: f.properties.alert,
-          lastUpdated: f.properties.updatedAt || new Date().toISOString(),
-        })
-      );
-      setHighways(formatted);
-      cache.highways = formatted;
-    } catch (e: any) {
-      setError(e.message);
-    } finally {
+    setTimeout(() => {
+      setHighways(DUMMY_HIGHWAYS.map(r => ({
+        ...r,
+        lastUpdated: new Date().toISOString(),
+      })));
       setLoading(false);
-    }
+      setError(null);
+    }, 800); // Simulate small delay
   }, []);
 
-  const fetchAttractions = React.useCallback(async (weatherApiKey?: string) => {
+  const fetchAttractions = useCallback(async (_weatherApiKey?: string) => {
     setLoading(true);
-    setError(null);
-
-    // Sample hardcoded attractions list
-    const mainAttractions = [
-      {
-        id: "hemis",
-        name: "Hemis Monastery",
-        coordinates: [77.7096, 33.9722] as [number, number],
-        description: "Largest monastery of Ladakh, known for Hemis Festival.",
-        details: {
-          altitude: 3636,
-          openingHours: "8am–6pm",
-          permits: "Not required",
-        },
-      },
-      {
-        id: "khardungla",
-        name: "Khardung La",
-        coordinates: [77.6006, 34.2781] as [number, number],
-        description: "One of the highest motorable roads in the world.",
-        details: {
-          altitude: 5359,
-          openingHours: "24/7 (weather permitting)",
-          permits: "Required (Inner Line)",
-        },
-      },
-      {
-        id: "pangong",
-        name: "Pangong Lake",
-        coordinates: [78.3957, 33.7381] as [number, number],
-        description: "Famous blue lake changing hues with sun and clouds.",
-        details: {
-          altitude: 4250,
-          openingHours: "All day (May-Oct best)",
-          permits: "Required (Inner Line)",
-        },
-      },
-      // Add more...
-    ];
-
-    // Fetch weather for all
-    const result: AttractionWeather[] = [];
-    for (const attr of mainAttractions) {
-      let weather: AttractionWeather["weather"] = null;
-      let lastUpdated = new Date().toISOString();
-      if (weatherApiKey) {
-        try {
-          const weatherResp = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${attr.coordinates[1]}&lon=${attr.coordinates[0]}&units=metric&appid=${weatherApiKey}`
-          );
-          const weatherData = await weatherResp.json();
-          weather = {
-            temperature: String(weatherData.main.temp) + "°C",
-            wind: String(weatherData.wind.speed) + "m/s",
-            precipitation: weatherData.rain
-              ? `${weatherData.rain["1h"]}mm`
-              : "0mm",
-            icon: weatherData.weather?.[0]?.icon
-              ? `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
-              : undefined,
-          };
-          lastUpdated = new Date(weatherData.dt * 1000).toISOString();
-        } catch (e) {
-          // gracefully ignore, fallback to null weather
-        }
-      }
-      // Explicitly assert coordinates as [number, number]
-      result.push({
-        ...attr,
-        coordinates: attr.coordinates as [number, number],
-        weather,
-        lastUpdated,
-      });
-    }
-    setAttractions(result);
-    cache.attractions = result;
+    setTimeout(() => {
+      setAttractions(DUMMY_ATTRACTIONS.map(a => ({
+        ...a,
+        lastUpdated: new Date().toISOString(),
+      })));
+      setLoading(false);
+      setError(null);
+    }, 800);
   }, []);
 
   const refresh = useCallback(
-    async (mapboxToken?: string, weatherApiKey?: string) => {
-      await fetchHighways(mapboxToken);
-      await fetchAttractions(weatherApiKey);
-      lastFetchTime = Date.now();
+    async (_mapboxToken?: string, _weatherApiKey?: string) => {
+      await fetchHighways();
+      await fetchAttractions();
     },
     [fetchHighways, fetchAttractions]
   );
 
-  // On mount / on cache-expiry, refetch
+  // On mount, set data
   React.useEffect(() => {
-    const fetchIfNeeded = () => {
-      if (Date.now() - lastFetchTime > CACHE_DURATION) {
-        refresh();
-      } else {
-        setHighways(cache.highways || []);
-        setAttractions(cache.attractions || []);
-      }
-    };
-    fetchIfNeeded();
-    // Setup timer for auto-refresh
-    const interval = setInterval(() => {
-      refresh();
-    }, CACHE_DURATION);
-    return () => clearInterval(interval);
-  }, [refresh]);
-  
+    setHighways(DUMMY_HIGHWAYS);
+    setAttractions(DUMMY_ATTRACTIONS);
+  }, []);
+
   return (
     <LiveUpdatesContext.Provider
       value={{
@@ -220,3 +212,5 @@ export function useLiveUpdates() {
   }
   return ctx;
 }
+
+// --- This file is growing large; consider splitting store logic/types if you want it cleaner!
