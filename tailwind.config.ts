@@ -67,7 +67,8 @@ export default {
 				crimson: '#760504',
 				saffron: '#FF9E1B',
 				jetblack: '#090A0E',
-				dairycream: '#F9E4BC'
+				dairycream: '#F9E4BC',
+        offwhite: '#FEF9E8',
 			},
 			fontFamily: {
 				'montserrat': ['Montserrat', 'sans-serif'],
@@ -106,11 +107,16 @@ export default {
             transform: 'translateY(0)'
           },
         },
+        'underline-grow': {
+          '0%': { transform: 'scaleX(0)', 'transform-origin': 'left' },
+          '100%': { transform: 'scaleX(1)', 'transform-origin': 'left' }
+        },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+        'underline-grow': 'underline-grow 0.6s 0.5s ease-out forwards',
 			}
 		}
 	},
