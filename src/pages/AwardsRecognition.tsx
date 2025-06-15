@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import AwardCard, { AwardCardProps } from "@/components/AwardCard";
 import { Helmet } from "react-helmet";
@@ -59,9 +60,9 @@ const AWARDS: AwardCardProps[] = [
 ];
 
 const HERO_IMAGES = [
-  { src: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=1600&h=900&fit=crop&q=80", alt: "A serene river flowing through a vast valley surrounded by majestic, snow-dusted mountains under a cloudy sky." },
-  { src: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1600&h=900&fit=crop&q=80", alt: "Two deer standing gracefully in a forest with tall trees and a mountain backdrop, symbolizing Ladakh's rich wildlife." },
-  { src: "https://images.unsplash.com/photo-1595624248734-3f19a4a3e2e2?w=1600&h=900&fit=crop&q=80", alt: "A dramatic mountain peak piercing through the clouds, representing the high-altitude splendor of Ladakh." },
+  { src: "https://images.unsplash.com/photo-1596700692211-23a4d8d1e3e5?w=1600&h=900&fit=crop&q=80", alt: "The magnificent Thiksey Monastery, a Tibetan Buddhist monastery of the Yellow Hat sect, perched on a hill in Ladakh." },
+  { src: "https://images.unsplash.com/photo-1617183654585-680075a40134?w=1600&h=900&fit=crop&q=80", alt: "Diskit Monastery in the Nubra Valley, known for its towering statue of Maitreya Buddha and panoramic views." },
+  { src: "https://images.unsplash.com/photo-1547475348-3585a9a5d59c?w=1600&h=900&fit=crop&q=80", alt: "The serene courtyard of Hemis Monastery, the wealthiest monastery in Ladakh, during a festival." },
 ];
 
 const ParticlesComponent = () => {
@@ -86,7 +87,7 @@ const ParticlesComponent = () => {
         size: { value: 2.5, random: true },
         move: { enable: true, speed: 1, direction: "bottom", random: true, straight: false, out_mode: "out" },
       },
-      interactivity: { events: { onhover: { enable: false }, onclick: { enable: false } } },
+      interactivity: { events: { onHover: { enable: false }, onClick: { enable: false } } },
       retina_detect: true,
     }),
     [],
