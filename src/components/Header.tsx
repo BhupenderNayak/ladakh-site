@@ -76,10 +76,12 @@ const Header = () => {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
             {/* Logo and Branding */}
             <div className="flex items-center gap-4">
+              {/* Responsive logo: shrinks on mobile, stays crisp on desktop */}
               <img
-                src="/placeholder.svg"
+                src="/logo-ladakh.svg"
                 alt="Government of Ladakh Emblem"
-                className="h-16 w-16 object-contain"
+                className="h-12 w-12 sm:h-16 sm:w-16 object-contain transition-all duration-200"
+                style={{ minWidth: 48, minHeight: 48 }}
               />
               <div className="text-center lg:text-left">
                 <h1 className="text-2xl lg:text-3xl font-bold text-crimson font-tinos">
