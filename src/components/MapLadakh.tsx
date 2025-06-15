@@ -25,6 +25,7 @@ export default function MapLadakh({}: MapLadakhProps) {
   const [weatherApiKey, setWeatherApiKey] = useState(localStorage.getItem("weatherApiKey") || "");
   const [selected, setSelected] = useState<Selected>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [mapError, setMapError] = useState<string | null>(null); // new: store local error
 
   const { highways, attractions, refresh, loading, error, fetchHighways, fetchAttractions } =
     useLiveUpdates();
@@ -49,152 +50,186 @@ export default function MapLadakh({}: MapLadakhProps) {
   }, [weatherApiKey]);
 
   useEffect(() => {
-    if (!mapboxToken || !mapContainer.current) return;
+    // Clean up any previous error on token change.
+    setMapError(null);
 
-    mapboxgl.accessToken = mapboxToken;
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/light-v11",
-      bounds: LADAKH_BOUNDS,
-      fitBoundsOptions: { padding: 40 },
-      minZoom: 6,
-      maxZoom: 13,
-      attributionControl: false,
-    });
+    if (!mapboxToken) {
+      setMapError("Please enter your Mapbox public token above to display the map.");
+      return;
+    }
+    if (!mapContainer.current) {
+      setMapError("Map container failed to mount.");
+      return;
+    }
 
-    // Add navigation controls, disables scroll zoom for UX
-    map.current.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), "top-right");
-    map.current.scrollZoom.disable();
+    try {
+      mapboxgl.accessToken = mapboxToken;
+    } catch (e) {
+      setMapError("Invalid Mapbox token format.");
+      console.error("Error setting Mapbox accessToken:", e);
+      return;
+    }
 
-    // Accessibility: ARIA
-    map.current.getContainer().setAttribute("aria-label", "Ladakh Interactive Map of Status");
-    map.current.getContainer().tabIndex = 0;
+    try {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: "mapbox://styles/mapbox/light-v11",
+        bounds: LADAKH_BOUNDS,
+        fitBoundsOptions: { padding: 40 },
+        minZoom: 6,
+        maxZoom: 13,
+        attributionControl: false,
+      });
 
-    // Add highways as geojson line layer
-    map.current.on("load", () => {
-      if (highways.length > 0) {
-        map.current &&
-          map.current.addSource("ladakh-highways", {
-            type: "geojson",
-            data: {
-              type: "FeatureCollection",
-              features: highways.map((road) => ({
-                type: "Feature",
-                id: road.id, // Fix: Add "id" property
-                geometry: {
-                  type: "LineString",
-                  coordinates: road.coordinates,
-                },
-                properties: {
+      // Add navigation controls, disables scroll zoom for UX
+      map.current.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), "top-right");
+      map.current.scrollZoom.disable();
+
+      // Accessibility: ARIA
+      map.current.getContainer().setAttribute("aria-label", "Ladakh Interactive Map of Status");
+      map.current.getContainer().tabIndex = 0;
+
+      // Catch tile loading errors
+      map.current.on("error", (evt) => {
+        // Only catch resource errors with some info
+        if (evt && (evt.error?.message?.includes("access token") || evt.error?.message?.toLowerCase().includes("unauthorized"))) {
+          setMapError("Couldn't load Mapbox map: Invalid or expired Mapbox public token.");
+        } else if (evt && evt.error?.message) {
+          setMapError(`Mapbox error: ${evt.error.message}`);
+        }
+        console.error("Mapbox error event:", evt);
+      });
+
+      // Add highways as geojson line layer (when map loads)
+      map.current.on("load", () => {
+        if (highways.length > 0) {
+          map.current &&
+            map.current.addSource("ladakh-highways", {
+              type: "geojson",
+              data: {
+                type: "FeatureCollection",
+                features: highways.map((road) => ({
+                  type: "Feature",
                   id: road.id,
-                  name: road.name,
-                  status: road.status,
-                },
-              })),
-            },
+                  geometry: {
+                    type: "LineString",
+                    coordinates: road.coordinates,
+                  },
+                  properties: {
+                    id: road.id,
+                    name: road.name,
+                    status: road.status,
+                  },
+                })),
+              },
+            });
+
+          map.current &&
+            map.current.addLayer({
+              id: "highway-lines",
+              type: "line",
+              source: "ladakh-highways",
+              layout: {
+                "line-join": "round",
+                "line-cap": "round",
+              },
+              paint: {
+                "line-color": [
+                  "match",
+                  ["get", "status"],
+                  "open", "#FF9E1B", // saffron for open
+                  "closed", "#760504", // crimson for closed
+                  "#090A0E", // jet black as fallback
+                ],
+                "line-width": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  6, 3,
+                  11, 10,
+                ],
+                "line-opacity": [
+                  "case",
+                  ["boolean", ["feature-state", "hover"], false],
+                  1,
+                  0.7,
+                ],
+              },
+            });
+
+          // Road interactivity (hover/click)
+          let hoveredRoadId: string | null = null;
+
+          map.current?.on("mousemove", "highway-lines", (e: any) => {
+            map.current!.getCanvas().style.cursor = "pointer";
+            if (e.features && e.features.length) {
+              const feat = e.features[0];
+              if (hoveredRoadId) {
+                map.current!.setFeatureState(
+                  { source: "ladakh-highways", id: hoveredRoadId },
+                  { hover: false }
+                );
+              }
+              hoveredRoadId = feat.id;
+              setHovered(feat.properties.id);
+              map.current!.setFeatureState(
+                { source: "ladakh-highways", id: feat.id },
+                { hover: true }
+              );
+            }
           });
 
-        map.current &&
-          map.current.addLayer({
-            id: "highway-lines",
-            type: "line",
-            source: "ladakh-highways",
-            layout: {
-              "line-join": "round",
-              "line-cap": "round",
-            },
-            paint: {
-              "line-color": [
-                "match",
-                ["get", "status"],
-                "open", "#FF9E1B", // saffron for open
-                "closed", "#760504", // crimson for closed
-                "#090A0E", // jet black as fallback
-              ],
-              "line-width": [
-                "interpolate",
-                ["linear"],
-                ["zoom"],
-                6, 3,
-                11, 10,
-              ],
-              "line-opacity": [
-                "case",
-                ["boolean", ["feature-state", "hover"], false],
-                1,
-                0.7,
-              ],
-            },
-          });
-
-        // Road interactivity (hover/click)
-        let hoveredRoadId: string | null = null;
-
-        map.current?.on("mousemove", "highway-lines", (e: any) => {
-          map.current!.getCanvas().style.cursor = "pointer";
-          if (e.features && e.features.length) {
-            const feat = e.features[0];
+          map.current?.on("mouseleave", "highway-lines", (e: any) => {
+            map.current!.getCanvas().style.cursor = "";
             if (hoveredRoadId) {
               map.current!.setFeatureState(
                 { source: "ladakh-highways", id: hoveredRoadId },
                 { hover: false }
               );
+              hoveredRoadId = null;
             }
-            hoveredRoadId = feat.id;
-            setHovered(feat.properties.id);
-            map.current!.setFeatureState(
-              { source: "ladakh-highways", id: feat.id },
-              { hover: true }
-            );
-          }
-        });
+            setHovered(null);
+          });
 
-        map.current?.on("mouseleave", "highway-lines", (e: any) => {
-          map.current!.getCanvas().style.cursor = "";
-          if (hoveredRoadId) {
-            map.current!.setFeatureState(
-              { source: "ladakh-highways", id: hoveredRoadId },
-              { hover: false }
-            );
-            hoveredRoadId = null;
-          }
-          setHovered(null);
-        });
+          map.current?.on("click", "highway-lines", (e: any) => {
+            if (e.features && e.features.length) {
+              const feat = e.features[0];
+              setSelected({ type: "road", id: feat.properties.id });
+            }
+          });
+        }
 
-        map.current?.on("click", "highway-lines", (e: any) => {
-          if (e.features && e.features.length) {
-            const feat = e.features[0];
-            setSelected({ type: "road", id: feat.properties.id });
-          }
-        });
-      }
+        // Add attractions as markers
+        attractions.forEach((attr) => {
+          const el = document.createElement("div");
+          el.className = "bg-saffron border-2 border-crimson rounded-full w-6 h-6 flex items-center justify-center shadow-md";
+          el.style.cursor = "pointer";
+          el.setAttribute("role", "button");
+          el.setAttribute("title", attr.name);
+          el.setAttribute("aria-label", attr.name);
+          el.tabIndex = 0;
+          el.innerHTML = `<span style="font-size: 18px; color: #090A0E;" aria-hidden>${attr.name.charAt(0)}</span>`;
 
-      // Add attractions as markers
-      attractions.forEach((attr) => {
-        const el = document.createElement("div");
-        el.className = "bg-saffron border-2 border-crimson rounded-full w-6 h-6 flex items-center justify-center shadow-md";
-        el.style.cursor = "pointer";
-        el.setAttribute("role", "button");
-        el.setAttribute("title", attr.name);
-        el.setAttribute("aria-label", attr.name);
-        el.tabIndex = 0;
-        el.innerHTML = `<span style="font-size: 18px; color: #090A0E;" aria-hidden>${attr.name.charAt(0)}</span>`;
-
-        el.addEventListener("click", () => {
-          setSelected({ type: "attraction", id: attr.id });
-        });
-
-        el.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
+          el.addEventListener("click", () => {
             setSelected({ type: "attraction", id: attr.id });
-          }
-        });
+          });
 
-        new mapboxgl.Marker(el)
-          .setLngLat(attr.coordinates)
-          .addTo(map.current!);
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              setSelected({ type: "attraction", id: attr.id });
+            }
+          });
+
+          new mapboxgl.Marker(el)
+            .setLngLat(attr.coordinates)
+            .addTo(map.current!);
+        });
       });
-    });
+    } catch (e) {
+      setMapError("Failed to initialize the map: " + (e instanceof Error ? e.message : String(e)));
+      console.error("Failed to initialize map:", e);
+      return;
+    }
 
     return () => {
       map.current?.remove();
@@ -245,7 +280,16 @@ export default function MapLadakh({}: MapLadakhProps) {
         {loading && <span className="ml-2 text-saffron">Loading...</span>}
         {error && <span className="ml-2 text-crimson">{error}</span>}
       </div>
-      <div ref={mapContainer} className="rounded-lg shadow-lg min-h-[400px] w-full" style={{height: 500}} />
+      <div ref={mapContainer} className="rounded-lg shadow-lg min-h-[400px] w-full bg-saffron/25 border border-crimson" style={{height: 500}} />
+      {/* User-friendly Mapbox token error */}
+      {mapError && (
+        <div className="absolute left-8 top-20 bg-crimson/90 text-white rounded px-4 py-3 shadow-lg z-10 max-w-lg" role="alert">
+          <strong className="font-bold">Map Error:</strong>{" "}
+          {mapError}
+          <br />
+          <span className="text-xs opacity-70">Tip: You can get your Mapbox public token from your Mapbox dashboard.</span>
+        </div>
+      )}
       {/* Tooltips on hover */}
       {hovered && (
         <div
