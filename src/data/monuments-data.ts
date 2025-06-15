@@ -38,6 +38,6 @@ export const MONUMENTS_DATA: Monument[] = [
     location: 'Hemis',
     era: '17th Century',
     description: 'A Tibetan Buddhist monastery of the Drukpa Lineage, re-established in 1672. It is famous for its annual Hemis festival.',
-    image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&q=80',
+    image: '/lovable-uploads/a636b72a-10cf-41a2-b315-ba3fbd41a04b.png',
   },
 ];
