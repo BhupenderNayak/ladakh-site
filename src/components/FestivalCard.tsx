@@ -16,7 +16,7 @@ const FestivalCard: React.FC<FestivalCardProps> = ({ festival }) => {
       <Card className="overflow-hidden h-full flex flex-col group-hover:shadow-xl transition-shadow duration-300">
         <div className="overflow-hidden">
           <img 
-            src={`${festival.image}&w=500&h=300&fit=crop`}
+            src={`${festival.image.split('?')[0]}?w=500&h=300&fit=crop&auto=format&q=80`}
             alt={`Image of ${festival.name}`}
             className="w-full h-48 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
             width="500"

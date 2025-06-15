@@ -32,7 +32,7 @@ const FestivalsHero = () => {
             <CarouselItem key={festival.id} className="h-full">
               <div className="relative w-full h-full aspect-[3/2] md:aspect-video lg:aspect-auto lg:h-[70vh] overflow-hidden">
                 <img
-                  src={`${festival.image}&w=1920&h=1080&fit=crop`}
+                  src={`${festival.image.split('?')[0]}?w=1920&h=1080&fit=crop&auto=format&q=80`}
                   alt={`Hero image for ${festival.name}`}
                   className="w-full h-full object-cover object-center animate-ken-burns"
                 />

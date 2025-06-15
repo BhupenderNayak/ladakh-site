@@ -32,7 +32,7 @@ const FestivalDetailsPage = () => {
           <article>
             <div className="overflow-hidden rounded-lg shadow-lg mb-8">
               <img 
-                src={`${festival.image}&w=1200&h=600&fit=crop`}
+                src={`${festival.image.split('?')[0]}?w=1200&h=600&fit=crop&auto=format&q=80`}
                 alt={`Image of ${festival.name}`}
                 className="w-full h-64 md:h-96 object-cover"
                 width="1200"
