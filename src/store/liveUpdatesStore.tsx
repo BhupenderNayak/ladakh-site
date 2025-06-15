@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useCallback } from "react";
 
 type HighwayStatus = {
@@ -90,7 +89,7 @@ export function LiveUpdatesProvider({ children }: { children: React.ReactNode })
     }
   }, []);
 
-  const fetchAttractions = useCallback(async (weatherApiKey?: string) => {
+  const fetchAttractions = React.useCallback(async (weatherApiKey?: string) => {
     setLoading(true);
     setError(null);
 
@@ -99,7 +98,7 @@ export function LiveUpdatesProvider({ children }: { children: React.ReactNode })
       {
         id: "hemis",
         name: "Hemis Monastery",
-        coordinates: [77.7096, 33.9722],
+        coordinates: [77.7096, 33.9722] as [number, number],
         description: "Largest monastery of Ladakh, known for Hemis Festival.",
         details: {
           altitude: 3636,
@@ -110,7 +109,7 @@ export function LiveUpdatesProvider({ children }: { children: React.ReactNode })
       {
         id: "khardungla",
         name: "Khardung La",
-        coordinates: [77.6006, 34.2781],
+        coordinates: [77.6006, 34.2781] as [number, number],
         description: "One of the highest motorable roads in the world.",
         details: {
           altitude: 5359,
@@ -121,7 +120,7 @@ export function LiveUpdatesProvider({ children }: { children: React.ReactNode })
       {
         id: "pangong",
         name: "Pangong Lake",
-        coordinates: [78.3957, 33.7381],
+        coordinates: [78.3957, 33.7381] as [number, number],
         description: "Famous blue lake changing hues with sun and clouds.",
         details: {
           altitude: 4250,
@@ -158,8 +157,10 @@ export function LiveUpdatesProvider({ children }: { children: React.ReactNode })
           // gracefully ignore, fallback to null weather
         }
       }
+      // Explicitly assert coordinates as [number, number]
       result.push({
         ...attr,
+        coordinates: attr.coordinates as [number, number],
         weather,
         lastUpdated,
       });
