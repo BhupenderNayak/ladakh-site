@@ -1,4 +1,3 @@
-
 export interface Monument {
   id: string;
   name: string;
@@ -15,7 +14,7 @@ export const MONUMENTS_DATA: Monument[] = [
     location: 'Leh',
     era: '17th Century',
     description: 'A former royal palace overlooking the Ladakhi Himalayan town of Leh. A stunning example of medieval Tibetan architecture.',
-    image: '/lovable-uploads/474c0a91-453c-40b6-9716-5153020354d2.png',
+    image: '/lovable-uploads/857f410d-f63d-4b99-a35a-9f0979af7f23.png',
   },
   {
     id: 'thiksey-monastery',

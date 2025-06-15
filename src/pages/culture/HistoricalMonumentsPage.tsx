@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import CulturePageLayout from './CulturePageLayout';
 import { MONUMENTS_DATA } from '@/data/monuments-data';
@@ -74,7 +73,7 @@ const HistoricalMonumentsPage = () => {
             loop
             muted
             playsInline
-            poster="/lovable-uploads/474c0a91-453c-40b6-9716-5153020354d2.png"
+            poster="/lovable-uploads/857f410d-f63d-4b99-a35a-9f0979af7f23.png"
           />
           <div 
             className="absolute inset-0 bg-black/20 flex items-center justify-center transition-opacity duration-300"
