@@ -17,7 +17,7 @@ const Index = () => {
           <div className="container mx-auto px-4 py-20">
             <div className="text-center max-w-4xl mx-auto">
               <h1 className="text-4xl lg:text-6xl font-bold text-crimson mb-6 font-tinos">
-                Welcome to Ladakh
+                Discover Ladakh
               </h1>
               <p className="text-xl text-jetblack mb-8 font-montserrat leading-relaxed">
                 Discover the Land of High Passes - where ancient Buddhist culture meets 
