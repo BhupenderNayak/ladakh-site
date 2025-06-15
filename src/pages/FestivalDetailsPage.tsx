@@ -40,9 +40,9 @@ const FestivalDetailsPage = () => {
               />
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold font-tinos text-crimson mb-4">{festival.name}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold font-tinos mb-4 bg-gradient-to-r from-saffron via-crimson to-saffron bg-clip-text text-transparent drop-shadow-sm text-center">{festival.name}</h1>
             
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-md text-jetblack mb-6 border-y border-dairycream py-4">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-md text-jetblack mb-6 border-y border-dairycream py-4">
               <div className="flex items-center gap-2">
                 <Tag className="text-saffron" size={18} />
                 <span className="font-semibold">Type:</span>

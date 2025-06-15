@@ -24,7 +24,7 @@ export const FESTIVALS_DATA: Festival[] = [
     location: 'Hemis Monastery',
     description: 'The Hemis Festival is a two-day celebration of the birth of Guru Padmasambhava, the founder of Tibetan Buddhism. Monks perform vibrant masked dances (chaam) in the monastery courtyard, accompanied by traditional music.',
     blurb: 'A vibrant celebration of Tibetan Buddhism with traditional masked dances.',
-    image: 'https://images.unsplash.com/photo-1466442929976-97f336a657be?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb',
+    image: '/lovable-uploads/be74c340-4cef-4579-99be-c8c2199d849e.png',
     type: 'Religious',
     isUpcoming: true,
     isMarquee: true,
