@@ -1,14 +1,13 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, Phone } from 'lucide-react';
+import { Search, Phone, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import AccessibilityControls from './AccessibilityControls';
 import LanguageSwitcher from './LanguageSwitcher';
 import NavigationMenu from './NavigationMenu';
 import SocialLinks from './SocialLinks';
-import { Drawer } from '@/components/ui/drawer';
-import MobileBottomBar from './MobileBottomBar';
+import { Drawer, DrawerTrigger } from '@/components/ui/drawer';
 import MobileMenu from './MobileMenu';
 
 const Header = () => {
@@ -36,7 +35,7 @@ const Header = () => {
 
   return (
     <Drawer open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-      <header className="bg-white shadow-lg relative z-40 font-montserrat">
+      <header className="bg-white shadow-lg sticky top-0 z-40 font-montserrat">
         <a ref={skipLinkRef} href="#main-content" id="skip-link" className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-crimson text-white px-4 py-2 z-50 font-medium" tabIndex={0}>
           Skip to main content
         </a>
@@ -67,17 +66,27 @@ const Header = () => {
         <div className="bg-dairycream border-b-2 border-crimson">
           <div className="container mx-auto px-4 py-4">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <img src="/logo-ladakh.svg" alt="Government of Ladakh Emblem" className="h-12 w-12 sm:h-16 sm:w-16 object-contain transition-all duration-200" style={{ minWidth: 48, minHeight: 48 }} />
-                <div className="text-center lg:text-left">
-                  <h1 className="text-2xl lg:text-3xl font-bold text-crimson font-tinos">
-                    Discover Ladakh
-                  </h1>
-                  <p className="text-jetblack text-sm font-medium">
-                    Official Tourism Portal | Government of Ladakh
-                  </p>
+              <div className="w-full flex items-center justify-between lg:w-auto">
+                <div className="flex items-center gap-4">
+                  <img src="/lovable-uploads/474c0a91-453c-40b6-9716-5153020354d2.png" alt="Tourism of Ladakh Logo" className="h-12 lg:h-16 object-contain" />
+                  <div className="hidden lg:block text-left">
+                    <h1 className="text-2xl lg:text-3xl font-bold text-crimson font-tinos">
+                      Discover Ladakh
+                    </h1>
+                    <p className="text-jetblack text-sm font-medium">
+                      Official Tourism Portal | Government of Ladakh
+                    </p>
+                  </div>
+                </div>
+                <div className="lg:hidden">
+                  <DrawerTrigger asChild>
+                    <Button variant="ghost" size="icon" aria-label="Open menu" className="h-12 w-12 text-crimson hover:bg-crimson/10 focus-visible:ring-saffron">
+                      <Menu size={28} />
+                    </Button>
+                  </DrawerTrigger>
                 </div>
               </div>
+
 
               {/* Search Bar */}
               <div className="w-full lg:w-auto lg:min-w-[300px]">
@@ -126,7 +135,6 @@ const Header = () => {
 
       {/* MOBILE ONLY NAVIGATION */}
       <MobileMenu activeDropdown={activeDropdown} setActiveDropdown={setActiveDropdown} onClose={() => setIsMenuOpen(false)} />
-      <MobileBottomBar />
     </Drawer>
   );
 };

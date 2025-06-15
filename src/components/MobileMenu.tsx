@@ -7,6 +7,7 @@ import SocialLinks from './SocialLinks';
 import NavigationMenu from './NavigationMenu';
 import { Phone } from 'lucide-react';
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 interface MobileMenuProps {
   setActiveDropdown: (dropdown: string | null) => void;
@@ -37,6 +38,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ activeDropdown, setActiveDropdo
         </DrawerHeader>
         
         <div className="space-y-6 text-base" onClick={handleLinkClick}>
+          <Button asChild className="w-full bg-crimson hover:bg-crimson/90 text-white font-semibold text-base h-12">
+            <Link to="/plan">Plan Your Journey</Link>
+          </Button>
+
           {/* Main Navigation */}
           <NavigationMenu activeDropdown={activeDropdown} setActiveDropdown={setActiveDropdown} isMobile={true} />
 
