@@ -2,6 +2,7 @@
 import React from "react";
 import AwardCard from "@/components/AwardCard";
 import { Helmet } from "react-helmet";
+import { Star } from "lucide-react";
 
 const AWARDS = [
   {
@@ -60,8 +61,12 @@ const AwardsRecognition = () => {
         <meta name="description" content="Discover the prestigious awards and international recognition that Ladakh has received for its stunning landscapes, sustainable tourism, and cultural heritage." />
       </Helmet>
       
-      <header className="bg-gradient-to-r from-crimson to-crimson/90 text-white py-16 shadow-2xl">
-        <div className="container mx-auto px-4 text-center">
+      <header 
+        className="relative bg-cover bg-center text-white py-24 shadow-2xl"
+        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1595624248734-3f19a4a3e2e2?w=1600&h=900&fit=crop')" }}
+      >
+        <div className="absolute inset-0 bg-jetblack/70" />
+        <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-5xl lg:text-6xl font-bold font-tinos mb-6 leading-tight">
             Awards & Recognition
           </h1>
@@ -73,31 +78,40 @@ const AwardsRecognition = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
+      <main className="container mx-auto px-4 py-16">
+        <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-crimson font-tinos mb-4">
             Our Distinguished Achievements
           </h2>
-          <p className="text-lg text-jetblack max-w-2xl mx-auto">
-            From international travel awards to UNESCO recognition, Ladakh continues to be celebrated worldwide.
+          <p className="text-lg text-jetblack max-w-3xl mx-auto leading-relaxed">
+            From international travel awards to UNESCO recognition, Ladakh continues to be celebrated for its commitment to excellence and sustainability.
           </p>
         </div>
         
-        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {AWARDS.map((award, idx) => (
-            <AwardCard key={idx} {...award} />
+            <div 
+              key={idx}
+              className="animate-fade-in-up"
+              style={{ animationDelay: `${idx * 150}ms`, opacity: 0 }}
+            >
+              <AwardCard {...award} />
+            </div>
           ))}
         </div>
         
-        <div className="mt-16 text-center">
-          <div className="bg-saffron/10 rounded-2xl p-8 max-w-4xl mx-auto border border-saffron/20">
-            <h3 className="text-2xl font-bold text-crimson font-tinos mb-4">
-              More Recognition Coming Soon
+        <div className="mt-24 text-center">
+          <div className="bg-dairycream/50 rounded-2xl p-10 max-w-4xl mx-auto border-2 border-saffron/30 shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
+            <div className="flex justify-center mb-4 text-saffron">
+              <Star size={40} strokeWidth={1.5} />
+            </div>
+            <h3 className="text-3xl font-bold text-crimson font-tinos mb-4">
+              The Journey Continues
             </h3>
-            <p className="text-jetblack text-lg leading-relaxed">
-              Ladakh continues to gain international attention for its commitment to sustainable tourism, 
-              preservation of cultural heritage, and offering unique experiences to travelers from around the world. 
-              Stay tuned for more exciting announcements!
+            <p className="text-jetblack text-lg leading-relaxed max-w-3xl mx-auto">
+              Ladakh's commitment to excellence is unwavering. We continue to strive for and anticipate more accolades 
+              that recognize our unique culture, pristine environment, and warm hospitality. 
+              Stay tuned for more exciting news!
             </p>
           </div>
         </div>
