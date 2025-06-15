@@ -22,7 +22,7 @@ export const MONUMENTS_DATA: Monument[] = [
     location: 'Thiksey',
     era: '15th Century',
     description: 'A gompa affiliated with the Gelug sect of Tibetan Buddhism. It is noted for its resemblance to the Potala Palace in Lhasa, Tibet.',
-    image: '/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png',
+    image: '/lovable-uploads/4b0dfb69-d1d8-41c3-834f-4dfb46035318.png',
   },
   {
     id: 'diskit-monastery',
