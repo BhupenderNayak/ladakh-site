@@ -94,6 +94,77 @@
   }
 }
 
+/* Header Sticky Performance Styles */
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: height 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.header-wrapper.header-small {
+  height: 60px !important;
+  background-color: rgba(118, 5, 4, 0.95) !important;
+  backdrop-filter: blur(8px);
+}
+
+.header-wrapper.header-small .utility-bar {
+  display: none !important;
+}
+
+.header-wrapper.header-small .branding-section {
+  background-color: transparent !important;
+  border-bottom: none !important;
+  padding: 0.5rem 0 !important;
+}
+
+.header-wrapper.header-small .main-nav {
+  display: none !important;
+}
+
+.header-wrapper.header-small .logo {
+  height: 2rem !important;
+}
+
+.header-wrapper.header-small .title-section {
+  display: none !important;
+}
+
+.header-wrapper.header-small .search-section {
+  display: none !important;
+}
+
+.header-wrapper.header-small .compact-cta {
+  display: block !important;
+}
+
+.header-wrapper.header-small .branding-section .container > div {
+  flex-direction: row !important;
+  gap: 1rem !important;
+}
+
+.header-wrapper.header-small .branding-section .text-crimson {
+  color: white !important;
+}
+
+/* Navigation and Dropdown Z-Index */
+.main-nav,
+.nav-dropdown,
+.submenu {
+  position: relative;
+  z-index: 1100;
+}
+
+.utility-bar {
+  z-index: 1000;
+}
+
+/* Dropdown positioning for higher z-index */
+.nav-dropdown {
+  position: absolute;
+  z-index: 1100;
+}
+
 /* Accessibility Enhancements */
 .sr-only {
   position: absolute;
@@ -176,7 +247,7 @@ body.dark-mode .text-gray-700 {
 /* Ensure dropdown menus have proper z-index and background */
 .dropdown-menu {
   background-color: white;
-  z-index: 50;
+  z-index: 1100;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 

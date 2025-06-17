@@ -15,44 +15,50 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const skipLinkRef = useRef<HTMLAnchorElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isUtilityBarVisible, setIsUtilityBarVisible] = useState(true);
+  const [isHeaderSmall, setIsHeaderSmall] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const lastScrollY = useRef(0);
-  const scrollDirection = useRef<'up' | 'down'>('down');
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const scrollThreshold = 100;
-      
-      // Determine scroll direction
-      if (currentScrollY > lastScrollY.current) {
-        scrollDirection.current = 'down';
-      } else if (currentScrollY < lastScrollY.current) {
-        scrollDirection.current = 'up';
+      // Clear any pending timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
       }
 
-      // Handle header collapse/expand logic
-      if (currentScrollY > scrollThreshold) {
-        if (scrollDirection.current === 'down' && !isCollapsed) {
-          setIsCollapsed(true);
-          setIsUtilityBarVisible(false);
-        } else if (scrollDirection.current === 'up' && isCollapsed) {
-          setIsCollapsed(false);
-          setIsUtilityBarVisible(true);
-        }
-      } else {
-        // Always show full header when at top
-        setIsCollapsed(false);
-        setIsUtilityBarVisible(true);
-      }
+      // Debounce scroll events by 50ms
+      scrollTimeoutRef.current = setTimeout(() => {
+        requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const scrollThreshold = 100;
+          const resetThreshold = 50;
 
-      lastScrollY.current = currentScrollY;
+          if (currentScrollY > scrollThreshold && !isHeaderSmall) {
+            setIsHeaderSmall(true);
+            if (headerRef.current) {
+              headerRef.current.classList.add('header-small');
+            }
+          } else if (currentScrollY < resetThreshold && isHeaderSmall) {
+            setIsHeaderSmall(false);
+            if (headerRef.current) {
+              headerRef.current.classList.remove('header-small');
+            }
+          }
+
+          lastScrollY.current = currentScrollY;
+        });
+      }, 50);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isCollapsed]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [isHeaderSmall]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -74,11 +80,8 @@ const Header = () => {
   return (
     <Drawer open={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <header 
-        className={`shadow-lg sticky top-0 z-40 font-montserrat transition-all duration-200 ease-in-out ${
-          isCollapsed 
-            ? 'bg-crimson/90 backdrop-blur-sm' 
-            : 'bg-white'
-        }`}
+        ref={headerRef}
+        className="header-wrapper sticky top-0 z-[1000] font-montserrat shadow-lg bg-white"
       >
         <a 
           ref={skipLinkRef} 
@@ -92,10 +95,7 @@ const Header = () => {
 
         {/* Top Utility Bar - DESKTOP ONLY */}
         <div 
-          className={`bg-jetblack text-white hidden lg:block transition-all duration-200 ease-in-out overflow-hidden ${
-            isUtilityBarVisible ? 'max-h-[60px] opacity-100' : 'max-h-0 opacity-0'
-          }`}
-          aria-expanded={isUtilityBarVisible}
+          className="utility-bar bg-jetblack text-white hidden lg:block z-[1000]"
           aria-label="Utility navigation bar"
         >
           <div className="container mx-auto px-4">
@@ -122,53 +122,21 @@ const Header = () => {
         </div>
 
         {/* Primary Branding Section */}
-        <div 
-          className={`border-b-2 border-crimson transition-all duration-200 ease-in-out ${
-            isCollapsed 
-              ? 'bg-transparent py-2' 
-              : 'bg-dairycream py-4'
-          }`}
-        >
+        <div className="branding-section border-b-2 border-crimson bg-dairycream py-4">
           <div className="container mx-auto px-4">
-            <div 
-              className={`flex items-center justify-between transition-all duration-200 ease-in-out ${
-                isCollapsed ? 'gap-2' : 'flex-col lg:flex-row gap-4'
-              }`}
-            >
+            <div className="flex items-center justify-between flex-col lg:flex-row gap-4">
               <div className="w-full flex items-center justify-between lg:w-auto">
                 <div className="flex items-center gap-4">
                   <img 
                     src="/lovable-uploads/75527b66-1600-48fb-ba8b-cb9002e5ccd8.png" 
                     alt="Discover Ladakh Logo" 
-                    className={`shrink-0 object-contain transition-all duration-200 ease-in-out ${
-                      isCollapsed 
-                        ? 'h-8 lg:h-10' 
-                        : 'h-16 lg:h-20'
-                    }`} 
+                    className="logo shrink-0 object-contain h-16 lg:h-20" 
                   />
-                  <div 
-                    className={`transition-all duration-200 ease-in-out ${
-                      isCollapsed 
-                        ? 'hidden' 
-                        : 'hidden lg:block'
-                    }`}
-                  >
-                    <h1 
-                      className={`font-bold font-tinos leading-tight transition-all duration-200 ease-in-out ${
-                        isCollapsed 
-                          ? 'text-xl text-white' 
-                          : 'text-3xl text-crimson'
-                      }`}
-                    >
+                  <div className="title-section hidden lg:block">
+                    <h1 className="font-bold font-tinos leading-tight text-3xl text-crimson">
                       Discover Ladakh
                     </h1>
-                    <p 
-                      className={`text-sm font-montserrat transition-all duration-200 ease-in-out ${
-                        isCollapsed 
-                          ? 'text-white/80' 
-                          : 'text-jetblack'
-                      }`}
-                    >
+                    <p className="text-sm font-montserrat text-jetblack">
                       Department of Tourism, Ladakh
                     </p>
                   </div>
@@ -179,11 +147,7 @@ const Header = () => {
                       variant="ghost" 
                       size="icon" 
                       aria-label="Open menu" 
-                      className={`h-12 w-12 hover:bg-crimson/10 focus-visible:ring-saffron transition-colors ${
-                        isCollapsed 
-                          ? 'text-white hover:bg-white/10' 
-                          : 'text-crimson'
-                      }`}
+                      className="h-12 w-12 hover:bg-crimson/10 focus-visible:ring-saffron transition-colors text-crimson"
                     >
                       <Menu size={28} />
                     </Button>
@@ -191,14 +155,8 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* Search Bar - Hidden when collapsed */}
-              <div 
-                className={`transition-all duration-200 ease-in-out overflow-hidden ${
-                  isCollapsed 
-                    ? 'w-0 opacity-0 max-w-0' 
-                    : 'w-full lg:w-auto lg:min-w-[300px] opacity-100'
-                }`}
-              >
+              {/* Search Bar */}
+              <div className="search-section w-full lg:w-auto lg:min-w-[300px]">
                 <form onSubmit={handleSearch} className="relative">
                   <Input 
                     type="search" 
@@ -219,14 +177,8 @@ const Header = () => {
                 </form>
               </div>
 
-              {/* Collapsed State - Primary CTA Only */}
-              <div 
-                className={`transition-all duration-200 ease-in-out ${
-                  isCollapsed 
-                    ? 'flex opacity-100' 
-                    : 'hidden opacity-0'
-                }`}
-              >
+              {/* Small Header CTA */}
+              <div className="compact-cta hidden">
                 <Button 
                   className="bg-white hover:bg-white/90 text-crimson font-semibold px-4 py-2 text-sm" 
                   aria-label="Plan your journey to Ladakh"
@@ -238,16 +190,11 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Main Navigation - DESKTOP ONLY - Hidden when collapsed */}
+        {/* Main Navigation - DESKTOP ONLY */}
         <nav 
-          className={`bg-white border-b shadow-sm hidden lg:flex transition-all duration-200 ease-in-out overflow-hidden ${
-            isCollapsed 
-              ? 'max-h-0 opacity-0' 
-              : 'max-h-[200px] opacity-100'
-          }`} 
+          className="main-nav bg-white border-b shadow-sm hidden lg:flex z-[1100]" 
           role="navigation" 
           aria-label="Main navigation"
-          aria-expanded={!isCollapsed}
         >
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">

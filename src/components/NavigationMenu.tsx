@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -112,7 +111,7 @@ const navigationItems = [
   },
   {
     name: 'Awards & Recognition',
-    href: '/awards', // <-- Set to the awards page
+    href: '/awards',
     hasDropdown: false
   },
   {
@@ -242,13 +241,13 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
             <>
               {/* Overlay */}
               <div 
-                className="fixed inset-0 z-30" 
+                className="fixed inset-0 z-[1050]" 
                 onClick={() => setActiveDropdown(null)}
                 aria-hidden="true"
               />
               
               {/* Dropdown Content */}
-              <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-xl z-40 min-w-[280px] max-w-[400px]">
+              <div className="nav-dropdown absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-xl z-[1100] min-w-[280px] max-w-[400px]">
                 <div className="p-4 grid gap-4">
                   {item.dropdown?.map((category) => (
                     <div key={category.category}>
